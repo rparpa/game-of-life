@@ -1,0 +1,20 @@
+{
+    "name": "rparpa/game-of-life",
+    "type": "project",
+    "require-dev": {
+        "atoum/atoum": "master-dev",
+        "atoum/stubs": "master-dev",
+        "atoum/autoloop-extension": "^0.1.0"
+    },
+    "authors": [
+        {
+            "name": "Rémi Parpaillon",
+            "email": "remi.parpaillon@gmail.com"
+        }
+    ],
+    "require": {
+    },
+    "autoload": {
+        "psr-0": {"GameOfLife\\": "src/"}
+    }
+}
