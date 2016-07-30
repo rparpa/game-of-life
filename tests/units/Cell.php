@@ -62,7 +62,7 @@ class Cell extends atoum\test
         $cells = new \mock\GameOfLife\Cells;
         $this->calling($cells)->countAlive = $numberOfNeighborsAlive;
         $state = $isAlive ? 'Living' : 'Dead';
-        $expectedSate = $expected ? 'Living' : 'Dead';
+        $expectedSate = $expected ? 'living' : 'dead';
 
         $this
             ->object($this->newTestedInstance(1, 2, $isAlive))

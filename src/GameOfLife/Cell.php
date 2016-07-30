@@ -25,7 +25,7 @@ class Cell
      * @param int  $y
      * @param bool $isAlive
      */
-    public function __construct($x, $y, $isAlive = false)
+    public function __construct($x, $y, bool $isAlive = false)
     {
         $this->x = $x;
         $this->y = $y;
@@ -41,10 +41,10 @@ class Cell
     }
 
     /**
-     * @param boolean $alive
+     * @param bool $alive
      * @return Cell
      */
-    public function setAlive($alive) : self
+    public function setAlive(bool $alive) : self
     {
         $this->alive = $alive;
         return $this;
@@ -66,5 +66,21 @@ class Cell
         }
 
         return false;
+    }
+
+    /**
+     * @return int
+     */
+    public function getX() : int
+    {
+        return $this->x;
+    }
+
+    /**
+     * @return int
+     */
+    public function getY() : int
+    {
+        return $this->y;
     }
 }
