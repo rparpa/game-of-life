@@ -28,14 +28,14 @@ class Cell
      * Cell constructor.
      * @param int   $x
      * @param int   $y
-     * @param bool  $isAlive
+     * @param bool|null  $isAlive
      * @param array $neighborPositions
      */
-    public function __construct($x, $y, bool $isAlive = false, array $neighborPositions = [])
+    public function __construct($x, $y, bool $isAlive = null, array $neighborPositions = [])
     {
         $this->x = $x;
         $this->y = $y;
-        $this->alive = $isAlive;
+        $this->alive = $isAlive === null ? mt_rand(0, 1) === 1 : $isAlive;
         $this->neighborPositions = $neighborPositions;
     }
 

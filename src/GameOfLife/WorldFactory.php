@@ -43,26 +43,39 @@ class WorldFactory
     }
 
     /**
-     * @param string $map
+     * @param string|null $map
      * @return array
      */
-    public function init(string $map) : array
+    public function init(string $map = null) : array
     {
-        $cellRows = explode(PHP_EOL, $map);
-        $cells = [];
-
-        foreach ($cellRows as $y => $row) {
-            foreach (explode(' ', $row) as $x => $cellChar) {
-                if (!isset($cells[$y])) {
-                    $cells[$y] = [];
+        if ($map === null) {
+            $cells = [];
+            for ($i = 0; $i < 20; $i++) {
+                if (!isset($cells[$i])) {
+                    $cells[$i] = [];
                 }
-                $cells[$y][$x] = new Cell(
-                    $x,
-                    $y,
-                    $cellChar === 'o'
-                );
+                for ($j = 0; $j < 20; $j++) {
+                    $cells[$i][$j] = new Cell($j, $i);
+                }
+            }
+        } else {
+            $world = explode(PHP_EOL, $map);
+            $cells = [];
+
+            foreach ($world as $y => $row) {
+                foreach (explode(' ', $row) as $x => $cellChar) {
+                    if (!isset($cells[$y])) {
+                        $cells[$y] = [];
+                    }
+                    $cells[$y][$x] = new Cell(
+                        $x,
+                        $y,
+                        $cellChar === 'o'
+                    );
+                }
             }
         }
+
 
         foreach ($cells as $rows) {
             /** @var Cell $cell */

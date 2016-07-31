@@ -98,8 +98,15 @@ NEXTGEN;
         $initial = $this->testedInstance->init($cellMap);
         $final   = $this->testedInstance->init($nexGenMap);
 
-        $this
-            ->array($this->testedInstance->createNextGen($initial))
-                ->isEqualTo($final, "Print map");
+        $this->array($calculated = $this->testedInstance->createNextGen($initial));
+
+        foreach ($calculated as $rows) {
+            /** @var \GameOfLife\Cell $cell */
+            foreach ($rows as $cell) {
+                $this
+                    ->boolean($final[$cell->getY()][$cell->getX()]->isAlive())
+                        ->isIdenticalTo($cell->isAlive(), "Wrong value for cell {$cell->getX()},{$cell->getY()}");
+            }
+        }
     }
 }
