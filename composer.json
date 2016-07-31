@@ -4,7 +4,7 @@
     "require-dev": {
         "atoum/atoum": "master-dev",
         "atoum/stubs": "master-dev",
-        "atoum/autoloop-extension": "^0.1.0"
+        "atoum/autoloop-extension": "master-dev"
     },
     "authors": [
         {

@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "7d63224f0f69f05ac38d797811c3664b",
-    "content-hash": "b0b004467c7bc090f83664030fb78d36",
+    "hash": "15035a5d3a360769462f19ef144abf1a",
+    "content-hash": "6a79e16816e74cac9c94cb4fba1f2c8a",
     "packages": [],
     "packages-dev": [
         {
@@ -90,7 +90,7 @@
         },
         {
             "name": "atoum/autoloop-extension",
-            "version": "0.1.0",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/atoum/autoloop-extension.git",
@@ -352,16 +352,16 @@
         },
         {
             "name": "symfony/filesystem",
-            "version": "v3.0.8",
+            "version": "v3.0.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/filesystem.git",
-                "reference": "a108b1d603ccb52addb5da9b14a3ba259f8b3db0"
+                "reference": "b2da5009d9bacbd91d83486aa1f44c793a8c380d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/filesystem/zipball/a108b1d603ccb52addb5da9b14a3ba259f8b3db0",
-                "reference": "a108b1d603ccb52addb5da9b14a3ba259f8b3db0",
+                "url": "https://api.github.com/repos/symfony/filesystem/zipball/b2da5009d9bacbd91d83486aa1f44c793a8c380d",
+                "reference": "b2da5009d9bacbd91d83486aa1f44c793a8c380d",
                 "shasum": ""
             },
             "require": {
@@ -397,14 +397,15 @@
             ],
             "description": "Symfony Filesystem Component",
             "homepage": "https://symfony.com",
-            "time": "2016-06-29 05:40:00"
+            "time": "2016-07-20 05:43:46"
         }
     ],
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
         "atoum/atoum": 20,
-        "atoum/stubs": 20
+        "atoum/stubs": 20,
+        "atoum/autoloop-extension": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
