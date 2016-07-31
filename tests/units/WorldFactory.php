@@ -100,6 +100,6 @@ NEXTGEN;
 
         $this
             ->array($this->testedInstance->createNextGen($initial))
-                ->isEqualTo($final);
+                ->isEqualTo($final, "Print map");
     }
 }

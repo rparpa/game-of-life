@@ -4,9 +4,28 @@ namespace GameOfLife;
 
 class WorldFactory
 {
-    private function getNeighbors(array $world, Cell $cell)
+    /**
+     * @param array $neighborPositions
+     * @param array $world
+     * @return Cell[]
+     */
+    private function getNeighbors(array $neighborPositions, array $world) : array
     {
         $neighbors = [];
+        foreach ($neighborPositions as $position) {
+            $neighbors[] = $world[$position[1]][$position[0]];
+        }
+        return $neighbors;
+    }
+
+    /**
+     * @param array $world
+     * @param Cell $cell
+     * @return array[]
+     */
+    private function computeNeighborPositions(array $world, Cell $cell) : array
+    {
+        $positions = [];
         for ($i = -1; $i < 2; $i++) {
             $cellY = $cell->getY() + $i;
             for ($j = -1; $j < 2; $j++) {
@@ -17,12 +36,16 @@ class WorldFactory
                 ) {
                     continue;
                 }
-                $neighbors[] = $world[$cellY][$cellX];
+                $positions[] = [$cellX, $cellY];
             }
         }
-        return $neighbors;
+        return $positions;
     }
 
+    /**
+     * @param string $map
+     * @return array
+     */
     public function init(string $map) : array
     {
         $cellRows = explode(PHP_EOL, $map);
@@ -33,9 +56,24 @@ class WorldFactory
                 if (!isset($cells[$y])) {
                     $cells[$y] = [];
                 }
-                $cells[$y][$x] = new Cell($x, $y, $cellChar === 'o');
+                $cells[$y][$x] = new Cell(
+                    $x,
+                    $y,
+                    $cellChar === 'o'
+                );
             }
         }
+
+        foreach ($cells as $rows) {
+            /** @var Cell $cell */
+            foreach ($rows as $cell) {
+                $cell->setNeighborPositions($this->computeNeighborPositions(
+                    $cells,
+                    $cell
+                ));
+            }
+        }
+
         return $cells;
     }
 
@@ -52,8 +90,9 @@ class WorldFactory
                     $cell->getX(),
                     $cell->getY(),
                     $cell->willBeAlive(new Cells(
-                        $this->getNeighbors($world, $cell)
-                    ))
+                        $this->getNeighbors($cell->getNeighborPositions(), $world)
+                    )),
+                    $cell->getNeighborPositions()
                 );
             }
         }

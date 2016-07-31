@@ -15,21 +15,28 @@ class Cell
     private $y;
 
     /**
+     * @var array
+     */
+    private $neighborPositions = [];
+
+    /**
      * @var boolean
      */
     private $alive;
 
     /**
      * Cell constructor.
-     * @param int  $x
-     * @param int  $y
-     * @param bool $isAlive
+     * @param int   $x
+     * @param int   $y
+     * @param bool  $isAlive
+     * @param array $neighborPositions
      */
-    public function __construct($x, $y, bool $isAlive = false)
+    public function __construct($x, $y, bool $isAlive = false, array $neighborPositions = [])
     {
         $this->x = $x;
         $this->y = $y;
         $this->alive = $isAlive;
+        $this->neighborPositions = $neighborPositions;
     }
 
     /**
@@ -82,5 +89,23 @@ class Cell
     public function getY() : int
     {
         return $this->y;
+    }
+
+    /**
+     * @return array
+     */
+    public function getNeighborPositions() : array
+    {
+        return $this->neighborPositions;
+    }
+
+    /**
+     * @param array $neighborPositions
+     * @return Cell
+     */
+    public function setNeighborPositions(array $neighborPositions) : self
+    {
+        $this->neighborPositions = $neighborPositions;
+        return $this;
     }
 }
