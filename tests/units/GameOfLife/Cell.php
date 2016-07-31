@@ -72,4 +72,26 @@ class Cell extends atoum\test
                 ->isIdenticalTo($expected, "$state cell with $numberOfNeighborsAlive living neighbors should be $expectedSate");
     }
 
+    public function testGettersSetters()
+    {
+        $this
+            ->object($this->newTestedInstance(1, 2, true))
+                ->isTestedInstance()
+
+            ->integer($this->testedInstance->getX())
+                ->isIdenticalTo(1)
+
+            ->integer($this->testedInstance->getY())
+                ->isIdenticalTo(2)
+
+            ->boolean($this->testedInstance->isAlive())
+                ->isTrue()
+
+            ->object($this->testedInstance->setNeighborPositions([[1, 2]]))
+                ->isTestedInstance()
+
+            ->array($this->testedInstance->getNeighborPositions())
+                ->isIdenticalTo([[1, 2]]);
+    }
+
 }

@@ -64,15 +64,7 @@ class Cell
     public function willBeAlive(Cells $neighbors) : bool
     {
         $aliveCells = $neighbors->countAlive();
-        if ($aliveCells === 3) {
-            return true;
-        }
-
-        if ($this->isAlive() && $aliveCells === 2) {
-            return true;
-        }
-
-        return false;
+        return $aliveCells === 3 || ($this->alive && $aliveCells === 2);
     }
 
     /**

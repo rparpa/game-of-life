@@ -6,7 +6,7 @@ use atoum;
 
 class WorldFactory extends atoum\test
 {
-    public function testInit()
+    protected function testInitDataProvider()
     {
         $cellMap = <<<MAP
 + + + + + + + + + + + + + +
@@ -22,26 +22,35 @@ class WorldFactory extends atoum\test
 + + + + + + + + + + + + + +
 MAP;
 
+        return [
+            [
+                $cellMap,
+                [
+                    [4, 3],
+                    [5, 2],
+                    [5, 3],
+                    [5, 4],
+                    [6, 3],
+                ],
+            ],
+            [
+                null,
+                [],
+            ]
+        ];
+    }
+
+    public function testInit(string $cellString = null, array $aliveCells)
+    {
         $this
             ->object($this->newTestedInstance())
-                ->isTestedInstance()
+                ->isTestedInstance();
 
-            ->array($result = $this->testedInstance->init($cellMap))
-                ->hasSize(11);
+        $aliveCellPositions = $aliveCells;
 
-        $aliveCellPositions = [
-            [4, 3],
-            [5, 2],
-            [5, 3],
-            [5, 4],
-            [6, 3],
-        ];
+        $this->array($result = $this->testedInstance->init($cellString));
 
         foreach ($result as $posY => $row) {
-            $this
-                ->array($row)
-                    ->hasSize(14);
-
             foreach ($row as $posX => $cell) {
                 $this
                     ->object($cell)
@@ -52,7 +61,7 @@ MAP;
                         ->isIdenticalTo($cell->getY());
                 ;
 
-                if ($cell->isAlive()) {
+                if ($cell->isAlive() && count($aliveCells)) {
                     $this
                         ->array($aliveCellPositions)
                             ->contains([$cell->getX(), $cell->getY()]);
